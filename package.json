@@ -1,0 +1,18 @@
+{
+  "name": "@spotube-app/plugin",
+  "version": "0.1.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": ["spotube", "plugin"],
+  "author": "KRTirtho <krtirtho@gmail.com>",
+  "license": "MIT",
+  "packageManager": "pnpm@10.20.0",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
