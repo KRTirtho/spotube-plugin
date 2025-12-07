@@ -1,4 +1,5 @@
 export * from "./models.js";
+export * from "./apis.js";
 
 import type {
   PluginConfiguration,
