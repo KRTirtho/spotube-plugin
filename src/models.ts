@@ -57,19 +57,13 @@ export interface SpotubeAudioLosslessContainerQuality {
 export type SpotubeAudioSourceContainerPreset =
   | {
       type: "lossy";
-      data: {
-        type: SpotubeMediaCompressionType;
-        name: string;
-        qualities: SpotubeAudioLossyContainerQuality[];
-      };
+      name: string;
+      qualities: SpotubeAudioLossyContainerQuality[];
     }
   | {
       type: "lossless";
-      data: {
-        type: SpotubeMediaCompressionType;
-        name: string;
-        qualities: SpotubeAudioLosslessContainerQuality[];
-      };
+      name: string;
+      qualities: SpotubeAudioLosslessContainerQuality[];
     };
 
 export interface SpotubeAudioSourceMatchObject {
@@ -98,7 +92,7 @@ export interface SpotubeBrowseSectionObject {
   title: string;
   externalUri: string;
   browseMore: boolean;
-  items: (SpotubeTrackObject | SpotubeSimplePlaylistObject | SpotubeSimpleAlbumObject | SpotubeSimpleAlbumObject)[];
+  items: (SpotubeTrackObject | SpotubeSimplePlaylistObject | SpotubeSimpleAlbumObject | SpotubeFullArtistObject)[];
 }
 
 export type PluginApi = "webview" | "localstorage" | "timezone";

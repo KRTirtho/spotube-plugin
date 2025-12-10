@@ -15,19 +15,19 @@ export interface SpotubeFormTextField {
 
 export type SpotubeFormField = SpotubeFormInputField | SpotubeFormTextField;
 
-export declare class SpotubeForm {
+declare class SpotubeFormType {
   static show(title: string, fields: SpotubeFormField[]): Promise<any>;
 }
 
-export declare const localStorage: {
+interface LocalStorageType {
   getItem(key: string): string | null | undefined;
   setItem(key: string, value: string): void;
   removeItem(key: string): void;
   clear(): void;
 };
 
-export declare class Timezone {
-  static getLocalTimeZone(): Promise<string>;
+declare class TimezoneType {
+  static getLocalTimezone(): Promise<string>;
 
   static getAvailableTimezones(): Promise<string[]>;
 }
@@ -43,13 +43,13 @@ export interface Cookie {
   readonly value: string;
 }
 
-export declare class Webview {
-  static create(uri: string): Promise<Webview>;
-
-  onUrlRequestStream(callback: () => void): void;
+declare class WebViewType {
+  static create(uri: string): Promise<WebViewType>;
+  
+  onUrlChange(callback: (url: string) => void): void;
   open(): Promise<void>;
   close(): Promise<void>;
-  getCookies(url: string): Promise<Cookie[]>;
+  cookies(url: string): Promise<Cookie[]>;
 }
 
 export interface YouTubeSearchResponseVideo {
@@ -72,8 +72,14 @@ export interface YouTubeStreamManifestResponse {
   videoId: string;
 }
 
-export declare class YouTubeEngine {
+declare class YouTubeEngineType {
   search(query: string): Promise<YouTubeSearchResponseVideo[]>;
   video(videoId: string): Promise<YouTubeSearchResponseVideo>;
   streamManifest(videoId: string): Promise<YouTubeStreamManifestResponse[]>;
 }
+
+export const WebView = (globalThis as any).WebView as typeof WebViewType;
+export const SpotubeForm = (globalThis as any).SpotubeForm as typeof SpotubeFormType;
+export const Timezone = (globalThis as any).Timezone as typeof TimezoneType;
+export const YouTubeEngine = (globalThis as any).YouTubeEngine as typeof YouTubeEngineType;
+export const localStorage = (globalThis as any).localStorage as LocalStorageType;

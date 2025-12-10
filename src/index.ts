@@ -14,6 +14,8 @@ import type {
   SpotubeFullPlaylistObject,
   SpotubePaginationResponseObject,
   SpotubeSearchResponseObject,
+  SpotubeSimpleAlbumObject,
+  SpotubeSimplePlaylistObject,
   SpotubeTrackObject,
   SpotubeUserObject,
 } from "./models.js";
@@ -65,7 +67,7 @@ export interface IAudioSourceEndpoint {
 export interface IAuthEndpoint {
   authenticate(): Promise<void>;
   logout(): Promise<void>;
-  isAuthenticated(): Promise<boolean>;
+  isAuthenticated(): boolean;
 }
 
 export interface IBrowseEndpoint {
@@ -73,11 +75,12 @@ export interface IBrowseEndpoint {
     offset?: number,
     limit?: number
   ): Promise<SpotubePaginationResponseObject<SpotubeBrowseSectionObject>>;
-  sectionItems<T extends { typeName: string }>(
+  
+  sectionItems(
     id: string,
     offset?: number,
     limit?: number
-  ): Promise<SpotubePaginationResponseObject<T>>;
+  ): Promise<SpotubePaginationResponseObject<SpotubeSimplePlaylistObject | SpotubeSimpleAlbumObject | SpotubeFullArtistObject>>;
 }
 
 export interface ICoreEndpoint {
