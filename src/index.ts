@@ -31,7 +31,7 @@ export interface IArtistEndpoint {
     id: string,
     offset?: number,
     limit?: number
-  ): Promise<SpotubePaginationResponseObject<SpotubeFullAlbumObject>>;
+  ): Promise<SpotubePaginationResponseObject<SpotubeSimpleAlbumObject>>;
   related(
     id: string,
     offset?: number,
@@ -64,10 +64,14 @@ export interface IAudioSourceEndpoint {
   ): Promise<SpotubeAudioSourceStreamObject[]>;
 }
 
-export interface IAuthEndpoint {
-  authenticate(): Promise<void>;
-  logout(): Promise<void>;
-  isAuthenticated(): boolean;
+export type AuthEventType = "login" | "logout" | "refreshSession";
+
+export abstract class IAuthEndpoint {
+  onAuthEvent!: (event: AuthEventType)=> void;
+
+  abstract authenticate(): Promise<void>;
+  abstract logout(): Promise<void>;
+  abstract isAuthenticated(): boolean;
 }
 
 export interface IBrowseEndpoint {
@@ -164,7 +168,7 @@ export interface IUserEndpoint {
   savedAlbums(
     offset?: number,
     limit?: number
-  ): Promise<SpotubePaginationResponseObject<SpotubeFullAlbumObject>>;
+  ): Promise<SpotubePaginationResponseObject<SpotubeSimpleAlbumObject>>;
   savedArtists(
     offset?: number,
     limit?: number
@@ -172,7 +176,7 @@ export interface IUserEndpoint {
   savedPlaylists(
     offset?: number,
     limit?: number
-  ): Promise<SpotubePaginationResponseObject<SpotubeFullPlaylistObject>>;
+  ): Promise<SpotubePaginationResponseObject<SpotubeSimplePlaylistObject>>;
 }
 
 export interface IPlugin {
